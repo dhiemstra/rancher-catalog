@@ -10,7 +10,7 @@ catalog:
       description: "public port to access the wordpress site"
       label: "Public Port"
       required: true
-      default: "80"
+      default: "10001"
       type: "int"
     - variable: db_password
       description: "DB password"
