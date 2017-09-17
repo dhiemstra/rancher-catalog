@@ -41,7 +41,7 @@ catalog:
         - rancher-nfs
         - rancher-efs
 services:
-  wordpress-lb:
+  lb:
     scale: 1
     lb_config:
       certs: []
