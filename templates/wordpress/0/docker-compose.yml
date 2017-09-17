@@ -22,10 +22,6 @@ services:
       - db
     depends_on:
       - db
-  lb:
-    image: rancher/lb-service-haproxy:v0.7.9
-    ports:
-      - ${public_port}
 volumes:
   db:
     driver: ${volume_driver}
