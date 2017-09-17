@@ -1,0 +1,29 @@
+version: '2'
+services:
+  db:
+    image: mariadb:10
+    volumes:
+      - db:/var/lib/mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=${db_password}
+      - MYSQL_DATABASE=${stack_name}
+  wordpress:
+    image: wordpress
+    volumes:
+      - wordpress:/var/www/html
+    environment:
+      - WORDPRESS_DB_NAME=${stack_name}
+      - WORDPRESS_DB_HOST=db
+      - WORDPRESS_DB_USER=root
+      - WORDPRESS_DB_PASSWORD=${db_password}
+      - WORDPRESS_USERNAME=${wordpress_username}
+      - WORDPRESS_PASSWORD=${wordpress_password}
+    links:
+      - db
+    depends_on:
+      - db
+volumes:
+  db:
+    driver: ${volume_driver}
+  wordpress:
+    driver: ${volume_driver}

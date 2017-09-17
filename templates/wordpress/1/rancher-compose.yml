@@ -1,0 +1,46 @@
+version: '2'
+catalog:
+  name: "Wordpress"
+  version: "v0.2-bitnami"
+  description: "Blog tool, publishing platform and CMS based on bitnami images"
+  uuid: Wordpress-1
+  minimum_rancher_version: v0.51.0
+  questions:
+    - variable: db_password
+      description: "DB password"
+      label: "DB Password"
+      required: true
+      default: ""
+      type: "string"
+    - variable: wordpress_username
+      description: "WordPress application username"
+      label: "WordPress application username"
+      required: true
+      default: "admin"
+      type: "string"
+    - variable: wordpress_password
+      description: "WordPress application password"
+      label: "WordPress application password"
+      required: true
+      default: "bitnami"
+      type: "string"
+    - variable: volume_driver
+      description: "Volume driver to use with this service"
+      label: "Volume driver"
+      required: true
+      default: "local"
+      type: enum
+      options:
+        - local
+        - rancher-nfs
+services:
+  wordpress:
+    scale: 1
+    retain_ip: true
+    health_check:
+      port: 80
+      interval: 5000
+      unhealthy_threshold: 3
+      request_line: 'GET / HTTP/1.0'
+      healthy_threshold: 2
+      response_timeout: 5000
